@@ -1,0 +1,17 @@
+{
+  "name": "easyswoole/file-watcher",
+  "type": "library",
+  "license": "Apache-2.0",
+  "autoload": {
+    "psr-4": {
+      "EasySwoole\\FileWatcher\\": "src/"
+    }
+  },
+  "require": {
+    "easyswoole/spl": "^1.3",
+    "easyswoole/component": "^2.2"
+  },
+  "require-dev": {
+    "easyswoole/swoole-ide-helper": "^1.0"
+  }
+}
