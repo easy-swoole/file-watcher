@@ -4,6 +4,8 @@
 namespace EasySwoole\FileWatcher;
 
 
+use EasySwoole\Utility\File;
+
 class WatchRule
 {
     private $path;
@@ -55,6 +57,29 @@ class WatchRule
     function scan2Items():WatchItems
     {
         $item = new WatchItems();
+        $files = File::scanDirectory($this->path);
+
+        $watchFiles  = array_diff($files['files'],$this->ignoreFiles);
+        $watchPaths = array_diff($files['dirs'],$this->ignorePaths);
+        foreach ($watchFiles as $index => $file) {
+            if (!$this->suffix) {
+                break;
+            }
+
+            $ret = in_array(pathinfo($file,PATHINFO_EXTENSION), $this->suffix);
+            if ($this->scanType === static::SCAN_TYPE_SUFFIX_MATCH && !$ret) {
+                unset($watchFiles[$index]);
+                continue;
+            }
+
+            if ($this->scanType === static::SCAN_TYPE_IGNORE_SUFFIX && $ret) {
+                unset($watchFiles[$index]);
+            }
+        }
+
+        $item->setFiles($watchFiles);
+        $item->setPaths($watchPaths);
+
         return $item;
     }
 }

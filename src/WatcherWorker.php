@@ -22,7 +22,7 @@ class WatcherWorker extends AbstractProcess
             $driver = new FileScanner($rule);
             $this->driverList[] = [
                 'driver'=>$driver,
-                'rules'=>$rule
+                'rule'=>$rule
             ];
         }
 
