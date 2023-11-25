@@ -8,7 +8,7 @@
     }
   },
   "require": {
-    "easyswoole/spl": "^1.3",
+    "easyswoole/spl": "^2.0",
     "easyswoole/component": "^2.2"
   },
   "require-dev": {
